@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.0.5
-Release  : 1
+Release  : 2
 URL      : http://downloads.us.xiph.org/releases/speex/speex-1.0.5.tar.gz
 Source0  : http://downloads.us.xiph.org/releases/speex/speex-1.0.5.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -50,6 +50,13 @@ lib components for the speex package.
 
 %build
 export LANG=C
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -ftree-loop-vectorize -ffast-math "
+export FCFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -ftree-loop-vectorize -ffast-math "
+export FFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -ftree-loop-vectorize -ffast-math "
+export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -ftree-loop-vectorize -ffast-math "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
