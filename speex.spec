@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : dsp
-Release  : 3
+Release  : 4
 URL      : http://downloads.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz
 Source0  : http://downloads.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz
 Summary  : An open-source, patent-free speech codec
