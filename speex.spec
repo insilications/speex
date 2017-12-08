@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 7
+Release  : 8
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -15,6 +15,7 @@ Requires: speex-doc
 BuildRequires : pkgconfig(fftw3f)
 BuildRequires : pkgconfig(ogg)
 BuildRequires : pkgconfig(speexdsp)
+BuildRequires : speexdsp-dev
 
 %description
 Speex is a patent-free audio codec designed especially for voice (unlike 
@@ -59,7 +60,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1512739596
+export SOURCE_DATE_EPOCH=1512739876
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
@@ -82,7 +83,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1512739596
+export SOURCE_DATE_EPOCH=1512739876
 rm -rf %{buildroot}
 pushd ../buildavx2/
 %make_install
