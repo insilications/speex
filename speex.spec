@@ -4,12 +4,13 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 8
+Release  : 9
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
 Group    : Development/Tools
 License  : BSD-3-Clause
+Requires: speex-bin
 Requires: speex-lib
 Requires: speex-doc
 BuildRequires : pkgconfig(fftw3f)
@@ -23,10 +24,19 @@ Vorbis which targets general audio) signals and providing good narrowband
 and wideband quality. This project aims to be complementary to the Vorbis
 codec.
 
+%package bin
+Summary: bin components for the speex package.
+Group: Binaries
+
+%description bin
+bin components for the speex package.
+
+
 %package dev
 Summary: dev components for the speex package.
 Group: Development
 Requires: speex-lib
+Requires: speex-bin
 Provides: speex-devel
 
 %description dev
@@ -60,19 +70,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1512739876
+export SOURCE_DATE_EPOCH=1512740048
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
-%configure --disable-static
+%configure --disable-static --enable-sse
 make  %{?_smp_mflags}
 
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=haswell"
 export CXXFLAGS="$CXXFLAGS -m64 -march=haswell"
 export LDFLAGS="$LDFLAGS -m64 -march=haswell"
-%configure --disable-static    --libdir=/usr/lib64/haswell --bindir=/usr/bin/haswell
+%configure --disable-static --enable-sse   --libdir=/usr/lib64/haswell --bindir=/usr/bin/haswell
 make  %{?_smp_mflags}
 popd
 %check
@@ -83,7 +93,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1512739876
+export SOURCE_DATE_EPOCH=1512740048
 rm -rf %{buildroot}
 pushd ../buildavx2/
 %make_install
@@ -93,6 +103,13 @@ popd
 %files
 %defattr(-,root,root,-)
 /usr/lib64/haswell/pkgconfig/speex.pc
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/haswell/speexdec
+/usr/bin/haswell/speexenc
+/usr/bin/speexdec
+/usr/bin/speexenc
 
 %files dev
 %defattr(-,root,root,-)
@@ -111,6 +128,7 @@ popd
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/doc/speex/*
+%doc /usr/share/man/man1/*
 
 %files lib
 %defattr(-,root,root,-)
