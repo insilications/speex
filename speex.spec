@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 9
+Release  : 10
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -64,13 +64,16 @@ lib components for the speex package.
 pushd ..
 cp -a speex-1.2rc2 buildavx2
 popd
+pushd ..
+cp -a speex-1.2rc2 buildavx512
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1512740048
+export SOURCE_DATE_EPOCH=1514730834
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
@@ -85,6 +88,13 @@ export LDFLAGS="$LDFLAGS -m64 -march=haswell"
 %configure --disable-static --enable-sse   --libdir=/usr/lib64/haswell --bindir=/usr/bin/haswell
 make  %{?_smp_mflags}
 popd
+pushd ../buildavx512/
+export CFLAGS="$CFLAGS -m64 -march=skylake-avx512"
+export CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512"
+export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
+%configure --disable-static --enable-sse   --libdir=/usr/lib64/haswell/avx512_1 --bindir=/usr/bin/haswell/avx512_1
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
@@ -93,19 +103,25 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1512740048
+export SOURCE_DATE_EPOCH=1514730834
 rm -rf %{buildroot}
 pushd ../buildavx2/
+%make_install
+popd
+pushd ../buildavx512/
 %make_install
 popd
 %make_install
 
 %files
 %defattr(-,root,root,-)
+/usr/lib64/haswell/avx512_1/pkgconfig/speex.pc
 /usr/lib64/haswell/pkgconfig/speex.pc
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/haswell/avx512_1/speexdec
+/usr/bin/haswell/avx512_1/speexenc
 /usr/bin/haswell/speexdec
 /usr/bin/haswell/speexenc
 /usr/bin/speexdec
@@ -132,6 +148,9 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/haswell/avx512_1/libspeex.so
+/usr/lib64/haswell/avx512_1/libspeex.so.1
+/usr/lib64/haswell/avx512_1/libspeex.so.1.5.0
 /usr/lib64/haswell/libspeex.so.1
 /usr/lib64/haswell/libspeex.so.1.5.0
 /usr/lib64/libspeex.so.1
