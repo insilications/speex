@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 10
+Release  : 11
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
