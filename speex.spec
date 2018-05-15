@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 12
+Release  : 13
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -73,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1514730834
+export SOURCE_DATE_EPOCH=1526426976
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
@@ -103,7 +103,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1514730834
+export SOURCE_DATE_EPOCH=1526426976
 rm -rf %{buildroot}
 pushd ../buildavx2/
 %make_install
@@ -115,8 +115,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/haswell/avx512_1/pkgconfig/speex.pc
-/usr/lib64/haswell/pkgconfig/speex.pc
 
 %files bin
 %defattr(-,root,root,-)
