@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2rc2
-Release  : 14
+Release  : 15
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2rc2.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -94,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541618230
+export SOURCE_DATE_EPOCH=1541625689
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
@@ -130,7 +130,7 @@ cd ../buildavx512;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1541618230
+export SOURCE_DATE_EPOCH=1541625689
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/speex
 cp COPYING %{buildroot}/usr/share/package-licenses/speex/COPYING
