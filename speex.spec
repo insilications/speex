@@ -4,7 +4,7 @@
 #
 Name     : speex
 Version  : 1.2.0
-Release  : 17
+Release  : 18
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Summary  : A free codec for free speech
