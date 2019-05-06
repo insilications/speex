@@ -4,10 +4,10 @@
 #
 Name     : speex
 Version  : 1.2.0
-Release  : 16
+Release  : 17
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
-Summary  : An open-source, patent-free speech codec
+Summary  : A free codec for free speech
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: speex-bin = %{version}-%{release}
@@ -29,7 +29,6 @@ codec.
 Summary: bin components for the speex package.
 Group: Binaries
 Requires: speex-license = %{version}-%{release}
-Requires: speex-man = %{version}-%{release}
 
 %description bin
 bin components for the speex package.
@@ -41,6 +40,7 @@ Group: Development
 Requires: speex-lib = %{version}-%{release}
 Requires: speex-bin = %{version}-%{release}
 Provides: speex-devel = %{version}-%{release}
+Requires: speex = %{version}-%{release}
 
 %description dev
 dev components for the speex package.
@@ -94,11 +94,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542158338
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffast-math -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
+export SOURCE_DATE_EPOCH=1557156080
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffast-math -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffast-math -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -ftree-loop-vectorize "
 %configure --disable-static --enable-sse
 make  %{?_smp_mflags}
 
@@ -130,7 +133,7 @@ cd ../buildavx512;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1542158338
+export SOURCE_DATE_EPOCH=1557156080
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/speex
 cp COPYING %{buildroot}/usr/share/package-licenses/speex/COPYING
