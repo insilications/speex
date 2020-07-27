@@ -1,1 +1,1 @@
---enable-sse
+--enable-shared --enable-static --enable-sse
