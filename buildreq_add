@@ -3,3 +3,7 @@
 speexdsp-dev
 speexdsp-staticdev
 findutils
+libsamplerate-dev
+libsamplerate-staticdev
+fftw-dev
+fftw-staticdev

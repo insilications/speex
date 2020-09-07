@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : speex
 Version  : 1.2.0
-Release  : 21
+Release  : 22
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -15,9 +15,14 @@ Requires: speex-bin = %{version}-%{release}
 Requires: speex-lib = %{version}-%{release}
 Requires: speex-man = %{version}-%{release}
 BuildRequires : buildreq-configure
+BuildRequires : fftw-dev
+BuildRequires : fftw-staticdev
 BuildRequires : findutils
+BuildRequires : libsamplerate-dev
+BuildRequires : libsamplerate-staticdev
 BuildRequires : pkgconfig(fftw3f)
 BuildRequires : pkgconfig(ogg)
+BuildRequires : pkgconfig(samplerate)
 BuildRequires : pkgconfig(speexdsp)
 BuildRequires : speexdsp-dev
 BuildRequires : speexdsp-staticdev
@@ -94,7 +99,7 @@ unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1599463333
+export SOURCE_DATE_EPOCH=1599480784
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -130,7 +135,7 @@ export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
  %configure --enable-shared --enable-static --enable-sse
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}   LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libspeexdsp.a /usr/lib64/libsamplerate.a -pthread -ldl -lm -lmvec -Wl,--no-whole-archive"
 
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 make clean
@@ -140,11 +145,11 @@ export FFLAGS="${FFLAGS_USE}"
 export FCFLAGS="${FCFLAGS_USE}"
 export LDFLAGS="${LDFLAGS_USE}"
 %configure --enable-shared --enable-static --enable-sse
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}   LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libspeexdsp.a /usr/lib64/libsamplerate.a -pthread -ldl -lm -lmvec -Wl,--no-whole-archive"
 
 
 %install
-export SOURCE_DATE_EPOCH=1599463333
+export SOURCE_DATE_EPOCH=1599480784
 rm -rf %{buildroot}
 %make_install
 

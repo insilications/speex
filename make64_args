@@ -1,0 +1,1 @@
+LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libspeexdsp.a /usr/lib64/libsamplerate.a -pthread -ldl -lm -lmvec -Wl,--no-whole-archive"
