@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : speex
 Version  : 1.2.0
-Release  : 22
+Release  : 23
 URL      : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Source0  : https://ftp.osuosl.org/pub/xiph/releases/speex/speex-1.2.0.tar.gz
 Summary  : An open-source, patent-free speech codec
@@ -99,7 +99,7 @@ unset http_proxy
 unset https_proxy
 unset no_proxy
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1599480784
+export SOURCE_DATE_EPOCH=1599492934
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -149,7 +149,7 @@ make  %{?_smp_mflags}   LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib64/libsp
 
 
 %install
-export SOURCE_DATE_EPOCH=1599480784
+export SOURCE_DATE_EPOCH=1599492934
 rm -rf %{buildroot}
 %make_install
 
